@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+            <!-- A table displaying user's portfolio -->
+            <table class="table table-striped">
+                <thead class="container">
+                    <tr class="row">
+                        <th class="col-1" scope="col">Symbol</th>
+                        <th class="col-3" scope="col">Name</th>
+                        <th class="col-1" scope="col">Shares</th>
+                        <th class="col-2" scope="col"></th>
+                        <th class="col-2" scope="col"></th>
+                        <th class="col-1" scope="col">Price</th>
+                        <th class="col-2" scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody class="container">
+                {% for stock in stocks %}
+                    <tr class="row">
+                        <td class="col-1">{{ stock.stocksymbol }}</td>
+                        <td class="col-3">{{ stock.stockname }}</td>
+                        <td class="col-1">{{ stock.shares }}</td>
+                        <!-- Add a buy button and return db id value using POST -->
+                        <td class="col-2">
+                            <form action="/buy" method="POST" class="container">
+                                <div class="form-row">
+                                    <input class="col-7" autocomplete="off" name="shares" type="text">
+                                    <input name="symbol" type="hidden" value="{{ stock.stocksymbol }}">
+                                    <button class="btn btn-primary col-5" type="submit" value="Buy">Buy</button>
+                                </div>
+                            </form>
+                        </td>
+                        <!-- Add a buy button and return db id value using POST -->
+                        <td class="col-2">
+                            <form action="/sell" method="POST" class="container">
+                                <div class="form-row">
+                                    <input class="col-7" autocomplete="off" name="shares" type="text">
+                                    <input name="symbol" type="hidden" value="{{ stock.stocksymbol }}">
+                                    <button class="btn btn-primary col-5" type="submit" value="Sell">Sell</button>
+                                </div>
+                            </form>
+                        </td>
+                        <td class="col-1">{{ stock.price | usd }}</td>
+                        <td class="col-2">{{ stock.total | usd }}</td>
+                    </tr>
+                {% endfor %}
+                    <tr class="row">
+                        <td class="col-1">CASH</td>
+                        <td class="col-3"></td>
+                        <td class="col-1"></td>
+                        <td class="col-2"></td>
+                        <td class="col-2"></td>
+                        <td class="col-1"></td>
+                        <td class="col-2">{{ value.cash | usd }}</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-1"></td>
+                        <td class="col-3"></td>
+                        <td class="col-1"></td>
+                        <td class="col-2"></td>
+                        <td class="col-2"></td>
+                        <td class="col-1"></td>
+                        <td class="col-2">{{ value.total | usd }}</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+{% endblock %}

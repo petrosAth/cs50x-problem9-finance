@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+            <!-- A table displaying a stock's current symbol, name and price -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ quotedStock.symbol }}</td>
+                        <td>{{ quotedStock.name }}</td>
+                        <td>{{ quotedStock.price | usd }}</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+{% endblock %}

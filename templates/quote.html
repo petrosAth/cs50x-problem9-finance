@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="section">
+            <!-- A form for users to quote for a stock’s current price -->
+            <form action="/quote" method="POST">
+                <div class="form-group">
+                    <input autocomplete="off" autofocus name="symbol" placeholder="Symbol" type="text">
+                </div>
+                <button class="btn btn-primary" type="submit" value="Quote">Quote</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
